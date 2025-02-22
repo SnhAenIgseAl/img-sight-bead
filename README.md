@@ -5,14 +5,16 @@
 
 ---
 
-#### 默认快捷键
+### 默认快捷键
 
 - `Esc` 应用准星
 - `F1` 显示窗口
 - `Eenter` 窗口居中
 
+### 本地部署
+
 ```sh
-# 本地部署
+# 下载项目
 git clone https://github.com/SnhAenIgseAl/img-sight-bead
 
 # 切换目录
@@ -25,7 +27,7 @@ npm i
 npm run dev
 ```
 
-#### FAQ
+### FAQ
 
 - ###### 如何使用？
 1. 打开软件，点击“+”，选择图片
