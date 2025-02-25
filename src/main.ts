@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
+// import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import TDesign from 'tdesign-vue-next';
+import 'tdesign-vue-next/es/style/index.css';
 import router from './router/index'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -21,7 +23,7 @@ pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia)
 app.use(router)
-app.use(ElementPlus)
+app.use(TDesign)
 app.mount('#app')
 	.$nextTick(() => {
 		postMessage({

@@ -1,10 +1,8 @@
 <template>
 
-    <!-- <div style="display: none;" @keydown="keyboardListener"></div> -->
-
     <el-upload class="uploader" 
+        :show-file-list="false"
         :auto-upload="false"
-        :show-file-list="false" 
         :on-change="previewImg"
         v-loading="loading">
 
@@ -15,16 +13,19 @@
         </el-icon>
 
     </el-upload>
+
+
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted} from 'vue'
-import { ElMessage, UploadProps } from 'element-plus'
-import { Plus } from '@element-plus/icons-vue'
 import { useSettingStore } from '../../store/setting';
 import { useFrameVisibleStore } from '../../store/frameVisible'
 import { storeToRefs } from 'pinia'
 import { useSightBead, windowShow, windowCenter } from '../../demos/ipc'
+import type { UploadProps } from 'element-plus'
+import { ElMessage, ElUpload, ElIcon } from 'element-plus';
+import { Plus } from '@element-plus/icons-vue'
 import axios from 'axios'
 import { uploadConfig, uploadResponse} from '../../config/upload.config'
 
@@ -70,6 +71,7 @@ const keyboardListener = (event: KeyboardEvent) => {
 
 // 预览图片
 const previewImg: UploadProps['onChange'] = (uploadFile) => {
+    
     if (uploadFile.raw!.type !== 'image/jpg' &&
         uploadFile.raw!.type !== 'image/jpeg' &&
         uploadFile.raw!.type !== 'image/png'
@@ -131,9 +133,9 @@ onUnmounted(() => {
     overflow: hidden;
     transition: var(--el-transition-duration-fast);
 
-    &:hover {
+    /* &:hover {
         background-color: var(--cl-black-10);
-    }
+    } */
 }
 
 .uploader .el-upload:hover {

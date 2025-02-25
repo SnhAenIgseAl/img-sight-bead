@@ -1,6 +1,6 @@
 # img-sight-bead
 
-图片准星软件，基于 https://github.com/electron-vite/electron-vite-vue 模板开发
+图片准星软件，基于 https://github.com/electron-vite/electron-vite-vue 模板开发  
 准星在线制作：https://crosshair.themeta.gg/
 
 ---
@@ -15,7 +15,7 @@
 
 ```sh
 # 下载项目
-git clone https://github.com/SnhAenIgseAl/img-sight-bead
+git clone https://github.com/SnhAenIgseAl/img-sight-bead.git
 
 # 切换目录
 cd img-sight-bead

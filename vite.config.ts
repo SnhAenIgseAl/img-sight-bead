@@ -77,5 +77,18 @@ export default defineConfig(({ command }) => {
 			}
 		})(),
 		clearScreen: false,
+		build: {
+			rollupOptions: {
+				output:{
+					manualChunks(id){
+						if(id.includes('node_modules')){
+							return 'vendor'
+						} else {
+							return 'index'
+						}
+					}
+				}
+			}
+		}
 	}
 })

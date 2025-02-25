@@ -5,22 +5,18 @@
             :key="index"
             class="setting-list">
 
-            <span>
-                {{ item.name }}：
-                <el-text size="large" type="primary">
-                    {{ item.key }}
-                </el-text>
+            <span>{{ item.name }}：{{ item.key }}
             </span>
 
-            <el-button text bg size="large" @click="listening(item.key)">更改</el-button>
+            <t-button theme="default" @click="listening(item.key)">更改</t-button>
         </p>
 
         <p class="setting-list">
             <span>token：</span>
-            <el-input v-model="USER_UPLOAD_TOKEN" 
+            <t-input v-model="USER_UPLOAD_TOKEN" 
                 placeholder="请输入token" 
                 size="large">
-            </el-input>
+            </t-input>
         </p>
 
     </div>
@@ -31,7 +27,7 @@
 import { ref, Ref, onMounted, onUnmounted } from 'vue'
 import { useSettingStore } from '../../store/setting'
 import { storeToRefs } from 'pinia';
-import { ElNotification } from 'element-plus';
+import { NotifyPlugin } from 'tdesign-vue-next';
 
 
 
@@ -64,7 +60,10 @@ let keyName: Ref<string>
 
 const listening = (key: Ref<string>) => {
     isListening.value = true
-    ElNotification.info('请按下快捷键')
+    NotifyPlugin.info({
+        title: '提示',
+        content: '请按下快捷键'
+    })
     keyName = key
 }
 
@@ -73,14 +72,20 @@ const handleKeyDown = (event: KeyboardEvent) => {
 
         for (let i = 0; i < settingList.length; i++) {
             if (settingList[i].key.value === event.key) {
-                ElNotification.error('快捷键已存在')
+                NotifyPlugin.error({
+                    title: '错误',
+                    content: '快捷键已存在'
+                })
                 isListening.value = false
                 return
             }
         }
 
         setKey(keyName, event)
-        ElNotification.success('设置成功')
+        NotifyPlugin.success({
+            title: '成功',
+            content: '设置成功'
+        })
         isListening.value = false
     }
 }
@@ -103,7 +108,7 @@ onUnmounted(() => {
 <style scoped>
 
 .setting-container {
-    width: 600px;
+    width: 480px;
     padding: 16px;
     /* padding-left: 96px; */
     display: flex;

@@ -1,21 +1,21 @@
 <template>
     <div v-if="MENU_VISIBLE" class="menu">
 
-        <el-tooltip 
+        <t-tooltip 
             v-for="(menuItem, menuIndex) in menuList"
             :key="menuIndex"
             :content="menuItem.text" 
             placement="bottom">
 
-            <el-button text 
-                size="large" 
+            <t-button 
+                variant="text"
                 class="menu-button"
-                :type="menuItem.type"
+                :theme="menuItem.theme"
                 @click="menuItem.hadleClick">
                 <i v-html="menuItem.icon"></i>
-            </el-button>
+            </t-button>
 
-        </el-tooltip>
+        </t-tooltip>
     </div>
 </template>
 
@@ -29,25 +29,25 @@ const menuList = [
         icon: '&#xe79f;',
         text: '最小化',
         hadleClick: windowMinimize,
-        type: ''
+        theme: ''
     },
     {
         icon: '&#xe6ee;',
         text: '最大化 / 窗口',
         hadleClick: windowMaximize,
-        type: ''
+        theme: ''
     },
     {
         icon: '&#xe7bc;',
         text: '全屏',
         hadleClick: windowFullScreen,
-        type: ''
+        theme: ''
     },
     {
         icon: '&#xe7cb;',
         text: '退出',
         hadleClick: windowClose,
-        type: 'danger'
+        theme: 'danger'
     },
 ]
 
