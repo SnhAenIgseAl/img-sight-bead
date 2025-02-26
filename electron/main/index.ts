@@ -182,3 +182,8 @@ ipcMain.handle('window-show', () => {
 ipcMain.handle('window-center', () => {
 	win?.center()
 })
+
+// 默认浏览器打开网站
+ipcMain.handle('open-website', (e, url: string) => {
+    shell.openExternal(url)
+})

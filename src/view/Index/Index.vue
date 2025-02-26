@@ -14,7 +14,6 @@
 
     </el-upload>
 
-
 </template>
 
 <script setup lang="ts">
@@ -26,14 +25,13 @@ import { useSightBead, windowShow, windowCenter } from '../../demos/ipc'
 import type { UploadProps } from 'element-plus'
 import { ElMessage, ElUpload, ElIcon } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue'
-import axios from 'axios'
-import { uploadConfig, uploadResponse} from '../../config/upload.config'
+import { uploadImageToImgbb, uploadImageToPicui, uploadImageToSm } from '../../api/upload';
 
 const {
 	USER_CHANGE_WINDOW_KEY,
 	USER_RESTORE_WINDOW_KEY,
     USER_WINDOW_CENTER_KEY,
-    USER_UPLOAD_TOKEN
+    USER_UPLOAD_SITE
 } = useSettingStore()
 
 const {
@@ -70,7 +68,7 @@ const keyboardListener = (event: KeyboardEvent) => {
 }
 
 // 预览图片
-const previewImg: UploadProps['onChange'] = (uploadFile) => {
+const previewImg: UploadProps['onChange'] = async (uploadFile) => {
     
     if (uploadFile.raw!.type !== 'image/jpg' &&
         uploadFile.raw!.type !== 'image/jpeg' &&
@@ -81,30 +79,25 @@ const previewImg: UploadProps['onChange'] = (uploadFile) => {
     }
 
     loading.value = true
-    USER_IMG.value = URL.createObjectURL(uploadFile.raw!)
 
-    // let fd = new FormData()
-    // fd.append('file', uploadFile.raw!)
-    // fd.append('permission', "1")
+    if (USER_UPLOAD_SITE === 'none') {
+        USER_IMG.value = URL.createObjectURL(uploadFile.raw!)
+    }
 
-	// axios.post(uploadConfig.url, fd, {
-    //     headers: {
-    //         'Authorization': 'Bearer ' + USER_UPLOAD_TOKEN,
-    //         'Accept': 'application/json',
-	// 		'Content-Type': 'multipart/form-data'
-	// 	}
-	// }).then(res => {
-	// 	if (res.status === 200) {
-	// 		let resData: uploadResponse = res.data
-	// 		USER_IMG.value = resData.data.links.url
-	// 	}
-	// })
-	// .catch(err => {
-	//     ElMessage.error(err)
-    // })
-    // .finally(() => {
-    //     loading.value = false
-    // })
+    if (USER_UPLOAD_SITE === 'picui') {
+        let res = await uploadImageToPicui(uploadFile.raw!)
+        USER_IMG.value = res.data.links.url
+    }
+
+    if (USER_UPLOAD_SITE === 'imgbb') {
+        let res = await uploadImageToImgbb(uploadFile.raw!)
+        // USER_IMG.value = res.data.links.url
+    }
+
+    if (USER_UPLOAD_SITE === 'sm') {
+        let res = await uploadImageToSm(uploadFile.raw!)
+        // USER_IMG.value = res.data.links.url
+    }
 
     loading.value = false
 }

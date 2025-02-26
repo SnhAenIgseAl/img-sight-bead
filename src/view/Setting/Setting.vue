@@ -1,30 +1,52 @@
 <template>
 
-    <div class="setting-container">
-        <p v-for="(item, index) in settingList"
-            :key="index"
-            class="setting-list">
+    <div style="margin: 16px;">
+        <t-typography-title level="h4">快捷键设置</t-typography-title>
 
-            <span>{{ item.name }}：{{ item.key }}
-            </span>
+        <div class="setting-container">
 
-            <t-button theme="default" @click="listening(item.key)">更改</t-button>
-        </p>
+            <p v-for="(item, index) in settingList"
+                :key="index"
+                class="setting-list">
 
-        <p class="setting-list">
-            <span>token：</span>
-            <t-input v-model="USER_UPLOAD_TOKEN" 
-                placeholder="请输入token" 
-                size="large">
-            </t-input>
-        </p>
+                <span>{{ item.name }}：
+                    <t-typography-text theme="error">
+                        {{ item.key }}
+                    </t-typography-text>
+                </span>
 
+                <t-button theme="default" @click="listening(item.key)">更改</t-button>
+            </p>
+        </div>
+
+        <t-typography-title level="h4">图床设置</t-typography-title>
+        
+        <div class="setting-container">
+            <p class="setting-list">
+                <span style="width: 90px;">token：</span>
+                <t-input v-model="USER_UPLOAD_TOKEN" 
+                    placeholder="请输入token" 
+                    size="large">
+                </t-input>
+            </p>
+
+            <p class="setting-list">
+                <span style="width: 90px;">图床：</span>
+                <t-select v-model="USER_UPLOAD_SITE" size="large">
+                    <t-option v-for="(item, key) in USER_UPLOAD_SITE_OPTIONS"
+                        :key="key" 
+                        :label="item" 
+                        :value="item" 
+                    />
+                </t-select>
+            </p>
+        </div>
     </div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, onMounted, onUnmounted } from 'vue'
+import { ref, Ref, onMounted, onUnmounted, watch } from 'vue'
 import { useSettingStore } from '../../store/setting'
 import { storeToRefs } from 'pinia';
 import { NotifyPlugin } from 'tdesign-vue-next';
@@ -35,7 +57,9 @@ const {
 	USER_CHANGE_WINDOW_KEY,
 	USER_RESTORE_WINDOW_KEY,
     USER_WINDOW_CENTER_KEY,
-    USER_UPLOAD_TOKEN
+    USER_UPLOAD_TOKEN,
+    USER_UPLOAD_SITE,
+    USER_UPLOAD_SITE_OPTIONS
 } = storeToRefs(useSettingStore())
 
 const settingList = [
@@ -109,11 +133,16 @@ onUnmounted(() => {
 
 .setting-container {
     width: 480px;
+    /* margin: 16px; */
     padding: 16px;
     /* padding-left: 96px; */
     display: flex;
     gap: 16px;
     flex-flow: column nowrap;
+    background-color: #fff;
+    border: 1px solid var(--cl-black-10);
+    border-radius: 8px;
+    /* box-shadow: 0 0 8px var(--cl-black-10); */
 }
 
 .setting-list {

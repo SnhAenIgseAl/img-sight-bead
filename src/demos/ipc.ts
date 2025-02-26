@@ -29,3 +29,7 @@ export function windowShow() {
 export function windowCenter() {
 	window.ipcRenderer.invoke('window-center')
 }
+
+export function openWebsite(url: string) {
+	window.ipcRenderer.invoke('open-website', url)
+}

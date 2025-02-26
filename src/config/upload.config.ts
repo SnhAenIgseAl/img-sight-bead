@@ -1,10 +1,9 @@
 export const uploadConfig = {
-    url: 'https://picui.cn/api/v1/upload',
-    // 如果未设置 Authorization 的情况下请求上传接口，将会被视为游客上传。游客上传的文件将会被限制在 1 小时内有效，并且无法删除。
-    // 接口文档说明 https://picui.cn/page/api-docs.html
+    picuiUrl: 'https://picui.cn/api/v1/upload',
+    imgbbUrl: 'https://api.imgbb.com/1/upload'
 }
 
-export interface uploadResponse {
+export interface PicuiUploadResponse {
     status: boolean,
     message: string,
     data: {

@@ -23,6 +23,14 @@
                 <span class="menu-title">软件设置</span>
             </t-menu-item>
 
+            <t-menu-item value="3"
+                @click="openWebsite('https://crosshair.themeta.gg/')">
+                <template #icon>
+                    <i>&#xe809;</i>
+                </template>
+                <span class="menu-title">准星制作</span>
+            </t-menu-item>
+
             <template #operations>
                 <t-button variant="text" shape="square" @click="collapsed = !collapsed">
                     <template #icon>
@@ -39,6 +47,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useFrameVisibleStore } from '../store/frameVisible'
+import { openWebsite } from '../demos/ipc';
 
 const {
     ASIDE_VISIBLE
