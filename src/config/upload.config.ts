@@ -3,7 +3,7 @@ export const uploadConfig = {
     imgbbUrl: 'https://api.imgbb.com/1/upload'
 }
 
-export interface PicuiUploadResponse {
+export interface PicuiResponse {
     status: boolean,
     message: string,
     data: {
@@ -12,18 +12,33 @@ export interface PicuiUploadResponse {
         pathname: string,
         origin_name: string,
         size: string,
-        mimetype: string,
-        extension: string,
         md5: string,
         sha1: string,
         links: {
             url: string,
             html: string,
-            bbcode: string,
             markdown: string,
             markdown_with_link: string,
             thumbnail_url: string,
             delete_url: string
         }
     }
+}
+
+export interface ImgbbResponse {
+    data: {
+        id: string,
+        title: string,
+        url: string,
+        width: string,
+        height: string,
+        size: string,
+        time: string,
+    },
+    success: boolean,
+    status: number
+}
+
+export interface SmResponse {
+    
 }

@@ -56,6 +56,7 @@ async function createWindow() {
 		hasShadow: true,
 		movable: true,
 		webPreferences: {
+			// Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
 			// contextIsolation: false,
       		nodeIntegration: true,
 			preload,

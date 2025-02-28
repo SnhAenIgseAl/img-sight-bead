@@ -91,12 +91,11 @@ const previewImg: UploadProps['onChange'] = async (uploadFile) => {
 
     if (USER_UPLOAD_SITE === 'imgbb') {
         let res = await uploadImageToImgbb(uploadFile.raw!)
-        // USER_IMG.value = res.data.links.url
+        USER_IMG.value = res.data.url
     }
 
     if (USER_UPLOAD_SITE === 'sm') {
         let res = await uploadImageToSm(uploadFile.raw!)
-        // USER_IMG.value = res.data.links.url
     }
 
     loading.value = false

@@ -1,4 +1,4 @@
-import { ref, Ref } from 'vue'
+import { reactive, ref, Ref } from 'vue'
 import { defineStore } from 'pinia'
 
 
@@ -18,9 +18,13 @@ export const useSettingStore = defineStore('setting', () => {
     const USER_WINDOW_CENTER_KEY = ref('Enter')
 
     // 图床上传 token
-    const USER_UPLOAD_TOKEN = ref('')
+    const USER_UPLOAD_TOKEN = ref({
+        picui: '',
+        imgbb: '',
+        sm: ''
+    })
 
-    // 图床选择
+    // 图床选择，默认为本地存储
     const USER_UPLOAD_SITE: Ref<'none' | 'picui' | 'imgbb' | 'sm'> = ref('none')
     const USER_UPLOAD_SITE_OPTIONS = ref(['none', 'picui', 'imgbb', 'sm'])
 

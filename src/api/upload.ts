@@ -1,6 +1,6 @@
 import { useSettingStore } from "../store/setting";
 import axios from "axios";
-import { uploadConfig, PicuiUploadResponse } from "../config/upload.config";
+import { uploadConfig, PicuiResponse, ImgbbResponse } from "../config/upload.config";
 import { MessagePlugin } from "tdesign-vue-next";
 
 const {
@@ -9,14 +9,14 @@ const {
 
 
 // picui 图床上传
-export const uploadImageToPicui = async (file: File): Promise<PicuiUploadResponse> => {
+export const uploadImageToPicui = async (file: File): Promise<PicuiResponse> => {
     let fd = new FormData()
     fd.append('file', file)
 
     return new Promise((resolve)  => {
         axios.post(uploadConfig.picuiUrl, fd, {
             headers: {
-                'Authorization': 'Bearer ' + USER_UPLOAD_TOKEN,
+                'Authorization': 'Bearer ' + USER_UPLOAD_TOKEN.picui,
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data'
             }
@@ -34,9 +34,9 @@ export const uploadImageToPicui = async (file: File): Promise<PicuiUploadRespons
 }
 
 // imgbb 图床上传
-export const uploadImageToImgbb = async (file: File) => {
+export const uploadImageToImgbb = async (file: File): Promise<ImgbbResponse> => {
     let fd = new FormData()
-    fd.append('key', USER_UPLOAD_TOKEN)
+    fd.append('key', USER_UPLOAD_TOKEN.imgbb)
     fd.append('image', file)
 
     return new Promise((resolve) => {
