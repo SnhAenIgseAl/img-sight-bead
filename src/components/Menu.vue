@@ -1,6 +1,12 @@
 <template>
     <div v-if="MENU_VISIBLE" class="menu">
 
+        <t-tooltip content="拖拽" placement="bottom">
+            <t-button variant="text" class="menu-button can-drag">
+                <i>&#xe75b;</i>
+            </t-button>
+        </t-tooltip>
+
         <t-tooltip 
             v-for="(menuItem, menuIndex) in menuList"
             :key="menuIndex"
@@ -48,7 +54,7 @@ const menuList = [
         text: '退出',
         hadleClick: windowClose,
         theme: 'danger'
-    },
+    }
 ]
 
 const {
@@ -64,7 +70,7 @@ const {
     right: 0;
     border: 1px solid var(--cl-black-10);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--cl-white-50);
 }
 
 .menu-button {
@@ -73,17 +79,21 @@ const {
     font-size: 16px;
     font-weight: bold;
 
-    &::after {
+    /* &::after {
         content: '';
         position: absolute;
         right: 0;
         width: 1px;
         height: 100%;
         background: var(--cl-black-10);
-    }
+    } */
 
     i {
         margin-right: 0;
     }
+}
+
+.can-drag {
+    -webkit-app-region: drag;
 }
 </style>
